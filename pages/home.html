@@ -11,12 +11,17 @@
     <title>Tasks</title>
 </head>
 <body>
-    <h1>To Do list</h1>
-    <h2>Hello <%=name%></h2>
+    <h1>You Need To Do This Shit <%=name%>!</h1>
+    <form action="/task/add" method="post">
+        <input type="text" name="new_task" id="new_task">
+        <Button type="submit">Add</Button>
+    </form>
     
+    <% tasks.reverse(); %>
     <% for(var i=0; i < tasks.length; i++) { %>
         <div>
-            <p><%=tasks[i]%></p><button><a>Complete</a></button>
+            <p><%=tasks[i]%></p>
+            <button><a href="/task/delete/<%=tasks[i]%>">Complete</a></button>
         </div>
     <% } %>
 </body>

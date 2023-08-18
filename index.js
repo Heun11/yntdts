@@ -5,6 +5,7 @@ var multer = require('multer');
 var upload = multer();
 var app = express();
 var session = require('express-session');
+var emailValidator = require('deep-email-validator');
 const db = require('better-sqlite3')('test.db');
 db.pragma('journal_mode = WAL');
 
@@ -128,15 +129,20 @@ app.get('/register', function(req, res){
     res.render('register.html', {root: __dirname+'/pages'});
 });
 
-app.post('/auth/register', function(req, res){
+app.post('/auth/register', async function(req, res){
     const {name, email, password} = req.body;
     if(user_exists_in_user_table(email)){
         res.redirect("/login");
     }
     else{
-        console.log(name, email, password);
-        insert_to_user_table(name, email, password, ["start using this"]);
-        res.end("SUCCESS");
+        const {valid, reason, validators} = await emailValidator.validate(email);
+        if(valid){
+            insert_to_user_table(name, email, password, ["start using this shit man!"]);
+            res.end("SUCCESS");
+        }
+        else{
+            res.end("email adress is not valid");
+        }
     }
 });
 
@@ -167,6 +173,36 @@ app.post('/auth/delete', function(req, res){
     }
 });
 
+app.get('/task/delete/:task', function(req, res){
+    if(req.session.login){
+        var u = get_data_about_user_from_user_table(req.session.login);
+        var tasks = tasks_to_arr(u.tasks);
+        var index = tasks.indexOf(req.params.task);
+        if (index !== -1) {
+            tasks.splice(index, 1);
+        }
+        update_tasks_of_user_from_user_table(req.session.login, tasks);
+        res.redirect("/");
+    }
+    else{
+        res.redirect("/login");
+    }
+});
+
+app.post('/task/add', function(req, res){
+    if(req.session.login){
+        var u = get_data_about_user_from_user_table(req.session.login);
+        var tasks = tasks_to_arr(u.tasks);
+        var {task} = req.body;
+        tasks.push(req.body.new_task);
+        update_tasks_of_user_from_user_table(req.session.login, tasks);
+        res.redirect("/");
+    }
+    else{
+        res.redirect("/login");
+    }
+});
+
 app.get('*', function(req, res){
     res.render('404.html', {root: __dirname+'/pages'});
 });
@@ -175,9 +211,5 @@ app.get('*', function(req, res){
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
+    // console.log(get_all_data_from_user_table());
 });
-
-// app.listen(8080, ()=>{
-//     console.log('Server started');
-//     // console.log(get_all_data_from_user_table());
-// });

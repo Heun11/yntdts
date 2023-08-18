@@ -4,8 +4,9 @@ body{
     /* background-image: linear-gradient(
         to right, rgb(201, 202, 177), rgb(247, 227, 237)
     ); */
-    background-color: #fafafa;
+    background-color: #191919;
     min-height: 100vh;
+    color:aliceblue;
 }
 
 /* PC */
