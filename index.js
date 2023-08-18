@@ -88,8 +88,6 @@ function user_exists_in_user_table(email){
 // insert_to_user_table("milan", "milo@gmail.com", "heslo123", ["povysavat", "fuck", "umyt sa"]);
 // insert_to_user_table("tomas", "tomo@gmail.com", "heslo123", ["napisat natalke", "ist srat", "ist spat"]);
 
-
-// const PORT = process.env.PORT || 3030;
 app.use('/', function(req, res, next){
     console.log("A new request received at " + Date.now());
     next();
@@ -173,11 +171,13 @@ app.get('*', function(req, res){
     res.render('404.html', {root: __dirname+'/pages'});
 });
 
-// app.listen(PORT, () => {
-//     console.log(`server started on port ${PORT}`);
-// });
 
-app.listen(8080, ()=>{
-    console.log('Server started');
-    // console.log(get_all_data_from_user_table());
+const PORT = process.env.PORT || 3030;
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`);
 });
+
+// app.listen(8080, ()=>{
+//     console.log('Server started');
+//     // console.log(get_all_data_from_user_table());
+// });
