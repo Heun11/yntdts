@@ -1,0 +1,23 @@
+{
+    "name": "yntdts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "better-sqlite3": "^8.5.1",
+        "cors": "^2.8.5",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "formidable": "*",
+        "fs": "*",
+        "multer": "*",
+        "path": "*"
+    }
+}
