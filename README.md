@@ -1,2 +1,2 @@
-# Vlož Tu (2)
-a small website that works like public warehouse
+# You Need To Do This Shit
+a small website for managing tasks :)
