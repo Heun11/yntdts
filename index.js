@@ -217,4 +217,4 @@ app.get('*', function(req, res){
 //     // update_tasks_of_user_from_user_table("marek@gmail.com", ["spravit pekny styl"]);
 // });
 
-module.exports = app;
+exports.app = app;
