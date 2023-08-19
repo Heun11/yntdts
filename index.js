@@ -100,12 +100,18 @@ app.get('/', function(req, res){
         res.render('home.html', {root: __dirname+'/pages', name:u.name, tasks:tasks_to_arr(u.tasks)});
     }
     else{
+        req.session.success = {is:false, mess:"You Are Not Logged in"};
         res.redirect("/login");
     }
 });
 
 app.get('/login', function(req, res){
-    res.render('login.html', {root: __dirname+'/pages'});
+    let success = null;
+    if(req.session.success!=null){
+        success = req.session.success;
+        req.session.success = null;
+    }
+    res.render('login.html', {root: __dirname+'/pages', success:success});
 });
 
 app.post('/auth/login', function(req, res){
@@ -114,34 +120,45 @@ app.post('/auth/login', function(req, res){
         var u = get_data_about_user_from_user_table(email);
         if(password==u.password){
             req.session.login = email;
+            req.session.success = {is:true, mess:"Login Successful"};
             res.redirect("/");
         }
         else{
+            req.session.success = {is:false, mess:"Wrong Password"};
             res.redirect("/login");
         }
     }
     else{
+        req.session.success = {is:false, mess:"User Dont Exist"};
         res.redirect("/register");
     }
 });
 
 app.get('/register', function(req, res){
-    res.render('register.html', {root: __dirname+'/pages'});
+    let success = null;
+    if(req.session.success!=null){
+        success = req.session.success;
+        req.session.success = null;
+    }
+    res.render('register.html', {root: __dirname+'/pages', success:success});
 });
 
 app.post('/auth/register', async function(req, res){
     const {name, email, password} = req.body;
     if(user_exists_in_user_table(email)){
+        req.session.success = {is:false, mess:"User Allready Exist"};
         res.redirect("/login");
     }
     else{
         const {valid, reason, validators} = await emailValidator.validate(email);
         if(valid){
             insert_to_user_table(name, email, password, ["start using this shit man!"]);
-            res.end("SUCCESS");
+            req.session.success = {is:true, mess:"Registration Successfull"};
+            res.redirect("/login");
         }
         else{
-            res.end("email adress is not valid");
+            req.session.success = {is:false, mess:"Registration Failed"};
+            res.redirect("/register");
         }
     }
 });
@@ -151,6 +168,7 @@ app.get('/delete', function(req, res){
         res.render('delete.html', {root: __dirname+'/pages'});
     }
     else{
+        req.session.success = {is:false, mess:"You Are Not Logged in"};
         res.redirect("/login");
     }
 });
@@ -162,13 +180,16 @@ app.post('/auth/delete', function(req, res){
         if(password==u.password && email==req.session.login){
             delete_user_from_user_table(email, password);
             req.session.login = null;
+            req.session.success = {is:true, mess:"User Deleted Successfully"};
             res.redirect("/login");
         }
         else{
+            req.session.success = {is:false, mess:"User Was Not Deleted"};
             res.redirect("/");
         }
     }
     else{
+        req.session.success = {is:false, mess:"This User Dont Exist"};
         res.redirect("/login");
     }
 });
@@ -177,6 +198,7 @@ app.post('/auth/logout', function(req, res){
     if(req.session.login){
         req.session.login = null;
     }
+    req.session.success = {is:true, mess:"Logout Successful"};
     res.redirect("/login");
 });
 
@@ -193,6 +215,7 @@ app.post('/task/delete/:task', function(req, res){
         res.redirect("/");
     }
     else{
+        req.session.success = {is:false, mess:"You Are Not Logged in"};
         res.redirect("/login");
     }
 });
@@ -209,6 +232,7 @@ app.post('/task/add', function(req, res){
         
     }
     else{
+        req.session.success = {is:false, mess:"You Are Not Logged in"};
         res.redirect("/login");
     }
 });

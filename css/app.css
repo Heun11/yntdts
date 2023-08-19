@@ -1,8 +1,17 @@
 
 /* PHONE */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 580px) {
      /* css for small device */
      /*                      */
+
+    .alert-true{
+        width: 60%;
+    }
+    
+    .alert-false{
+        width: 60%;
+    }
+
      .auth-body{
           /* background-color: #18314F; */
           min-height: 90vh;

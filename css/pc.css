@@ -56,10 +56,28 @@ body{
     font-size: 36px;
     margin-left: 50px;
 }
+
+.alert-true{
+    background-color: greenyellow;
+    margin: auto;
+    width: 20%;
+    color: #0F0546;
+    font-size: 2rem;
+    border-radius: 10px;
+}
+
+.alert-false{
+    background-color: rgb(210, 39, 39);
+    margin: auto;
+    width: 20%;
+    color: #0F0546;
+    font-size: 2rem;
+    border-radius: 10px;
+}
   
 
 /* PC */
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 580px) {
     /* css for large device */
     /*                      */
 

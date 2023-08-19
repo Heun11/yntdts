@@ -13,6 +13,12 @@
 <body class="auth-body">
     <h1 class="auth-h1">Register Screen</h1>
 
+    <% if(success!=null){ %>
+        <div class="alert-<%=success.is%>">
+            <p><%=success.mess%></p>
+        </div>
+    <% } %>
+
     <div class="auth-box">
         <form action="/auth/register", method="post">
             <input class="auth-input" placeholder="name" type="text" name="name" id="user_name">
