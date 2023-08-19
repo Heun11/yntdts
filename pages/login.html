@@ -10,13 +10,22 @@
     <script src="/script.js"></script>
     <title>Login</title>
 </head>
-<body>
-    <h1>Login Screen</h1>
+<body class="auth-body">
 
-    <form action="/auth/login" method="post">
-        <input type="text" name="email" id="user_email">
-        <input type="password" name="password" id="user_password">
-        <button type="submit">Ano</button>
-    </form>
+    <h1 class="auth-h1">Login Screen</h1>
+
+    <div class="auth-box">
+        <form class="auth-form" action="/auth/login" method="post">
+            <input class="auth-input" placeholder="email" type="text" name="email" id="user_email">
+            <br>
+            <input class="auth-input" placeholder="password" type="password" name="password" id="user_password">
+            <br>
+            <button class="auth-submit" type="submit">Ano</button>
+        </form>
+
+        <form action="/register">
+            <button class="auth-next" >Dont have account?</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -10,14 +10,23 @@
     <script src="/script.js"></script>
     <title>Register</title>
 </head>
-<body>
-    <h1>Register Screen</h1>
+<body class="auth-body">
+    <h1 class="auth-h1">Register Screen</h1>
 
-    <form action="/auth/register", method="post">
-        <input type="text" name="name" id="user_name">
-        <input type="text" name="email" id="user_email">
-        <input type="password" name="password" id="user_password">
-        <button type="submit">Ano</button>
-    </form>
+    <div class="auth-box">
+        <form action="/auth/register", method="post">
+            <input class="auth-input" placeholder="name" type="text" name="name" id="user_name">
+            <br>
+            <input class="auth-input" placeholder="email" type="text" name="email" id="user_email">
+            <br>
+            <input class="auth-input" placeholder="password" type="password" name="password" id="user_password">
+            <br>
+            <button class="auth-submit" type="submit">Ano</button>
+        </form>
+        
+        <form action="/login">
+            <button class="auth-next" >Already have account?</button>
+        </form>
+    </div>
 </body>
 </html>
