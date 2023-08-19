@@ -21,7 +21,10 @@
     <% for(var i=0; i < tasks.length; i++) { %>
         <div>
             <p><%=tasks[i]%></p>
-            <button><a href="/task/delete/<%=tasks[i]%>">Complete</a></button>
+            <form action="/task/delete/<%=tasks[i]%>" method="post">
+                <button type="submit" >Complete</button>
+            </form>
+            <!-- <button><a href="/task/delete/<%=tasks[i]%>">Complete</a></button> -->
         </div>
     <% } %>
 </body>

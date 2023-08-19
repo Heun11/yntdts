@@ -173,7 +173,7 @@ app.post('/auth/delete', function(req, res){
     }
 });
 
-app.get('/task/delete/:task', function(req, res){
+app.post('/task/delete/:task', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);
         var tasks = tasks_to_arr(u.tasks);
@@ -193,10 +193,12 @@ app.post('/task/add', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);
         var tasks = tasks_to_arr(u.tasks);
-        var {task} = req.body;
-        tasks.push(req.body.new_task);
-        update_tasks_of_user_from_user_table(req.session.login, tasks);
+        if(req.body.new_task.trim().length != 0){
+            tasks.push(req.body.new_task);
+            update_tasks_of_user_from_user_table(req.session.login, tasks);
+        }
         res.redirect("/");
+        
     }
     else{
         res.redirect("/login");
@@ -211,5 +213,6 @@ app.get('*', function(req, res){
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
-    // console.log(get_all_data_from_user_table());
+    console.log(get_all_data_from_user_table());
+    // update_tasks_of_user_from_user_table("marek@gmail.com", ["spravit pekny styl"]);
 });
