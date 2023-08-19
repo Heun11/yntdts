@@ -210,11 +210,9 @@ app.get('*', function(req, res){
 });
 
 
-// const PORT = process.env.PORT || 3030;
-// app.listen(PORT, () => {
-//     console.log(`server started on port ${PORT}`);
-//     console.log(get_all_data_from_user_table());
-//     // update_tasks_of_user_from_user_table("marek@gmail.com", ["spravit pekny styl"]);
-// });
-
-exports.app = app;
+const PORT = process.env.PORT || 3030;
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`);
+    console.log(get_all_data_from_user_table());
+    // update_tasks_of_user_from_user_table("marek@gmail.com", ["spravit pekny styl"]);
+});
