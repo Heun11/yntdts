@@ -10,13 +10,19 @@
     <script src="/script.js"></script>
     <title>Delete</title>
 </head>
-<body>
-    <h1>Delete Screen</h1>
+<body class="auth-body">
+    <h1 class="auth-h1">Delete Account Screen</h1>
 
-    <form action="/auth/delete", method="post">
-        <input type="text" name="email" id="user_email">
-        <input type="password" name="password" id="user_password">
-        <button type="submit">Ano</button>
+    <form action="/">
+        <button class="auth-submit" type="submit">Back to home</button>
     </form>
+
+    <div class="auth-box">
+        <form action="/auth/delete", method="post">
+            <input class="auth-input" placeholder="email" type="text" name="email" id="user_email">
+            <input class="auth-input" placeholder="password" type="password" name="password" id="user_password">
+            <button class="auth-submit" type="submit" style="background-color:rgb(113, 39, 39); font-size: 140%;">Yes, I want to delete my account</button>
+        </form>
+    </div>
 </body>
 </html>

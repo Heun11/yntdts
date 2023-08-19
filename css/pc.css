@@ -4,11 +4,59 @@ body{
     /* background-image: linear-gradient(
         to right, rgb(201, 202, 177), rgb(247, 227, 237)
     ); */
-    background-color: #191919;
+    background: linear-gradient(122deg, #000 0%, #0F0546 100%);
     min-height: 100vh;
     color:aliceblue;
     font-family: Sans-serif;
 }
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 100vw;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+  
+.sidenav a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav form button{
+    padding: 2%;
+    text-decoration: none;
+    font-size: 25px;
+    color: #eeeaea;
+    background-color: #1D1844;
+    border-color: black;
+    border-radius: 5px;
+    display: block;
+    transition: 0.3s;
+    margin: 2%;
+}
+  
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+  
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+  
 
 /* PC */
 @media screen and (min-width: 480px) {
@@ -17,7 +65,6 @@ body{
 
     .auth-body{
         /* background-color: #18314F; */
-        background: linear-gradient(121deg, #1D1844 12%, #2563BB 100%);
         min-height: 90vh;
         color:aliceblue;
         justify-content: center;
@@ -26,7 +73,7 @@ body{
 
     .auth-box{
         margin: auto;
-        background-color: #384E77;
+        background: linear-gradient(252deg, #16023A 0%, #1E1371 100%);
         padding: 3%;
         border-radius: 20px;
         width: 30%;

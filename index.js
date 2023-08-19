@@ -173,6 +173,14 @@ app.post('/auth/delete', function(req, res){
     }
 });
 
+app.post('/auth/logout', function(req, res){
+    if(req.session.login){
+        req.session.login = null;
+    }
+    res.redirect("/login");
+});
+
+
 app.post('/task/delete/:task', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);

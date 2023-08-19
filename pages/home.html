@@ -11,7 +11,31 @@
     <title>Tasks</title>
 </head>
 <body>
+    <span style="font-size:30px;cursor:pointer;float: right;" onclick="openNav()">&#9776; Menu</span>
     <h1>You Need To Do This Shit <%=name%>!</h1>
+
+    <div id="mySidenav" class="sidenav">
+        <h1>Menu:</h1>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <form action="/auth/logout" method="post"><button type="submit">Logout</button></form>
+        <form action="/delete" method="get"><button type="submit">Delete Account</button></form>
+    </div>
+    <script>
+        function openNav() {
+            var val = 250;
+            if(window.innerWidth<250){
+                val = window.innerWidth;
+            }
+            document.getElementById("mySidenav").style.width = val+"px";
+            document.getElementById("mySidenav").style.left = window.innerWidth-val+"px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("mySidenav").style.left = window.innerWidth+"px";
+        }
+    </script>
+
     <form action="/task/add" method="post">
         <input type="text" name="new_task" id="new_task">
         <Button type="submit">Add</Button>

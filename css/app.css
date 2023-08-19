@@ -5,7 +5,6 @@
      /*                      */
      .auth-body{
           /* background-color: #18314F; */
-          background: linear-gradient(121deg, #1D1844 12%, #2563BB 100%);
           min-height: 90vh;
           color:aliceblue;
           justify-content: center;
@@ -14,7 +13,7 @@
   
       .auth-box{
           margin: auto;
-          background-color: #384E77;
+          background: linear-gradient(252deg, #16023A 0%, #1E1371 100%);
           padding: 3%;
           border-radius: 20px;
           width: 90%;
