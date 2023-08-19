@@ -3,5 +3,59 @@
 @media screen and (max-width: 480px) {
      /* css for small device */
      /*                      */
-
+     .auth-body{
+          /* background-color: #18314F; */
+          background: linear-gradient(121deg, #1D1844 12%, #2563BB 100%);
+          min-height: 90vh;
+          color:aliceblue;
+          justify-content: center;
+          text-align: center;
+      }
+  
+      .auth-box{
+          margin: auto;
+          background-color: #384E77;
+          padding: 3%;
+          border-radius: 20px;
+          width: 90%;
+      }
+  
+      .auth-h1{
+          margin-top: 10vh;
+          margin-bottom: 5vh;
+          font-size: 3rem;
+      }
+  
+      .auth-input{
+          font-size: 2rem;
+          padding: 1.2%;
+          border-radius: 10px;
+          margin-bottom: 2%;
+          width: 80%;
+      }
+  
+      .auth-submit{
+          font-size: 2rem;
+          padding: 1.2%;
+          border-radius: 10px;
+          background-color: #1D1844;
+          border-width: 2px;
+          border-color: black;
+          color:aliceblue;
+          padding-left: 4%;
+          padding-right: 4%;
+          margin-bottom: 2%;
+      }
+  
+      .auth-next{
+          font-size: 1.5rem;
+          padding: 1.2%;
+          border-radius: 10px;
+          background-color: #8BBEB2;
+          border-width: 2px;
+          border-color: black;
+          color:aliceblue;
+          padding-left: 4%;
+          padding-right: 4%;
+      }
 }

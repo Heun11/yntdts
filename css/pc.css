@@ -29,7 +29,7 @@ body{
         background-color: #384E77;
         padding: 3%;
         border-radius: 20px;
-        width: 40%;
+        width: 30%;
     }
 
     .auth-h1{
@@ -43,6 +43,7 @@ body{
         padding: 1.2%;
         border-radius: 10px;
         margin-bottom: 2%;
+        max-width: 80%;
     }
 
     .auth-submit{
