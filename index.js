@@ -210,7 +210,7 @@ app.get('*', function(req, res){
 });
 
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 9002;
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
     console.log(get_all_data_from_user_table());
