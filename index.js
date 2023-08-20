@@ -23,15 +23,22 @@ app.use(express.static(path.join(__dirname,'css')));
 app.use(express.static(path.join(__dirname,'js')));
 app.use(express.static(path.join(__dirname,'resources')));
 
-
-function tasks_to_str(tasks_arr){
-    // ["clean dishes", "fuck", "test"] => "clean dishes[]fuck[]test[]"
-    var str = "";
-    tasks_arr.forEach(task => {
-        str+=task+"[]";
-    });
-    return str;
+function tasks_to_str(tasks_json){
+    return JSON.stringify(tasks_json);
 }
+
+function tasks_to_json(tasks_str){
+    return JSON.parse(tasks_str);
+}
+
+// function tasks_to_str(tasks_arr){
+//     // ["clean dishes", "fuck", "test"] => "clean dishes[]fuck[]test[]"
+//     var str = "";
+//     tasks_arr.forEach(task => {
+//         str+=task+"[]";
+//     });
+//     return str;
+// }
 
 function tasks_to_arr(tasks_str){
     // "clean dishes[]fuck[]test[]" => ["clean dishes", "fuck", "test"] 
@@ -97,7 +104,7 @@ app.use('/', function(req, res, next){
 app.get('/', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);
-        res.render('home.html', {root: __dirname+'/pages', name:u.name, tasks:tasks_to_arr(u.tasks)});
+        res.render('home.html', {root: __dirname+'/pages', name:u.name, tasks:tasks_to_json(u.tasks)});
     }
     else{
         req.session.success = {is:false, mess:"You Are Not Logged in"};
@@ -206,10 +213,41 @@ app.post('/auth/logout', function(req, res){
 app.post('/task/delete/:task', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);
-        var tasks = tasks_to_arr(u.tasks);
-        var index = tasks.indexOf(req.params.task);
-        if (index !== -1) {
-            tasks.splice(index, 1);
+        var tasks = tasks_to_json(u.tasks);
+        if (req.params.task in tasks) {
+            delete tasks[req.params.task];
+        }
+        update_tasks_of_user_from_user_table(req.session.login, tasks);
+        res.redirect("/");
+    }
+    else{
+        req.session.success = {is:false, mess:"You Are Not Logged in"};
+        res.redirect("/login");
+    }
+});
+
+app.post('/task/progress/:task', function(req, res){
+    if(req.session.login){
+        var u = get_data_about_user_from_user_table(req.session.login);
+        var tasks = tasks_to_json(u.tasks);
+        if (req.params.task in tasks) {
+            tasks[req.params.task]["in_progress"] = !tasks[req.params.task]["in_progress"];
+        }
+        update_tasks_of_user_from_user_table(req.session.login, tasks);
+        res.redirect("/");
+    }
+    else{
+        req.session.success = {is:false, mess:"You Are Not Logged in"};
+        res.redirect("/login");
+    }
+});
+
+app.post('/task/important/:task', function(req, res){
+    if(req.session.login){
+        var u = get_data_about_user_from_user_table(req.session.login);
+        var tasks = tasks_to_json(u.tasks);
+        if (req.params.task in tasks) {
+            tasks[req.params.task]["important"] = !tasks[req.params.task]["important"];
         }
         update_tasks_of_user_from_user_table(req.session.login, tasks);
         res.redirect("/");
@@ -223,9 +261,10 @@ app.post('/task/delete/:task', function(req, res){
 app.post('/task/add', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);
-        var tasks = tasks_to_arr(u.tasks);
+        var tasks = tasks_to_json(u.tasks);
         if(req.body.new_task.trim().length != 0){
-            tasks.push(req.body.new_task);
+            var res_task = req.body.new_task.trim();
+            tasks[res_task] = {"in_progress":false, "important":false};
             update_tasks_of_user_from_user_table(req.session.login, tasks);
         }
         res.redirect("/");
@@ -246,5 +285,5 @@ const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
     console.log(get_all_data_from_user_table());
-    // update_tasks_of_user_from_user_table("marek@gmail.com", ["spravit pekny styl"]);
+    // update_tasks_of_user_from_user_table("marek@gmail.com", {"spravit pekny styl":{"in_progress":false, "important":true}});
 });

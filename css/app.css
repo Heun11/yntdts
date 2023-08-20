@@ -12,58 +12,30 @@
         width: 60%;
     }
 
-     .auth-body{
-          /* background-color: #18314F; */
-          min-height: 90vh;
-          color:aliceblue;
-          justify-content: center;
-          text-align: center;
-      }
-  
-      .auth-box{
-          margin: auto;
-          background: linear-gradient(252deg, #16023A 0%, #1E1371 100%);
-          padding: 3%;
-          border-radius: 20px;
-          width: 90%;
-      }
-  
-      .auth-h1{
-          margin-top: 10vh;
-          margin-bottom: 5vh;
-          font-size: 3rem;
-      }
-  
-      .auth-input{
-          font-size: 2rem;
-          padding: 1.2%;
-          border-radius: 10px;
-          margin-bottom: 2%;
-          width: 80%;
-      }
-  
-      .auth-submit{
-          font-size: 2rem;
-          padding: 1.2%;
-          border-radius: 10px;
-          background-color: #1D1844;
-          border-width: 2px;
-          border-color: black;
-          color:aliceblue;
-          padding-left: 4%;
-          padding-right: 4%;
-          margin-bottom: 2%;
-      }
-  
-      .auth-next{
-          font-size: 1.5rem;
-          padding: 1.2%;
-          border-radius: 10px;
-          background-color: #8BBEB2;
-          border-width: 2px;
-          border-color: black;
-          color:aliceblue;
-          padding-left: 4%;
-          padding-right: 4%;
-      }
+    .auth-box{
+        width: 90%;
+    }
+
+    .home-h1{
+        font-size: 2.2rem;
+    }
+
+    .home-menu-button{
+        font-size: 1.4rem;
+    }
+
+    .task-add textarea{
+        width: 70%;
+        height: 3rem;
+        font-size: 1.2rem;
+    }
+    
+    .task-box p{
+        padding: 2%;
+    }
+    
+    .task-box form{
+        margin: 2%;
+        margin-top: 0;
+    }
 }

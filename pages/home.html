@@ -10,16 +10,14 @@
     <script src="/script.js"></script>
     <title>Tasks</title>
 </head>
-<body>
-    <span style="font-size:30px;cursor:pointer;float: right;" onclick="openNav()">&#9776; Menu</span>
-    <h1>You Need To Do This Shit <%=name%>!</h1>
-
+<body class="home-body">
     <div id="mySidenav" class="sidenav">
         <h1>Menu:</h1>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <form action="/auth/logout" method="post"><button type="submit">Logout</button></form>
-        <form action="/delete" method="get"><button type="submit">Delete Account</button></form>
+        <form action="/delete" method="get"><button type="submit">Delete</button></form>
     </div>
+    <button class="home-menu-button" onclick="openNav()">&#9776; Menu</button>
     <script>
         function openNav() {
             var val = 250;
@@ -36,19 +34,35 @@
         }
     </script>
 
-    <form action="/task/add" method="post">
-        <input type="text" name="new_task" id="new_task">
+
+    <h1 class="home-h1">You Need To Do This Shit <%=name%>!</h1>
+
+    <form class="task-add" action="/task/add" method="post">
+        <textarea type="text" name="new_task" id="new_task"></textarea>
         <Button type="submit">Add</Button>
     </form>
     
-    <% tasks.reverse(); %>
-    <% for(var i=0; i < tasks.length; i++) { %>
-        <div>
-            <p><%=tasks[i]%></p>
-            <form action="/task/delete/<%=tasks[i]%>" method="post">
+    <% var t = Object.keys(tasks); %>
+    <% var task_css_class; %>
+    <% var in_progress; %>
+    <% t.reverse(); %>
+    <% for(var i=0; i < t.length; i++) { %>
+        <% task_css_class = ""; %>
+        <% in_progress = ""; %>
+        <% if(tasks[t[i]]["in_progress"]){task_css_class+=" task-in_progress"; in_progress=" - in_progress";} %>
+        <% if(tasks[t[i]]["important"]){task_css_class+=" task-important";} %>
+        <div class="task-box">
+            <p class="<%=task_css_class%>" ><%=t[i]%><%=in_progress%></p>
+            <br>
+            <form action="/task/delete/<%=t[i]%>" method="post">
                 <button type="submit" >Complete</button>
             </form>
-            <!-- <button><a href="/task/delete/<%=tasks[i]%>">Complete</a></button> -->
+            <form action="/task/progress/<%=t[i]%>" method="post">
+                <button type="submit" >Progress</button>
+            </form>
+            <form action="/task/important/<%=t[i]%>" method="post">
+                <button type="submit" >important</button>
+            </form>
         </div>
     <% } %>
 </body>
