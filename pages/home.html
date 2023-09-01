@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible", content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="https://www.iconarchive.com/download/i108459/google/noto-emoji-people-bodyparts/11947-middle-finger-light-skin-tone.1024.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="/pc.css">
     <link rel="stylesheet" href="/app.css">
-    <script src="/script.js"></script>
+    <script src="/script.js" defer></script>
     <title>Tasks</title>
 </head>
-<body class="home-body">
+<body class="home-body" onload="getTasks()">
     <div id="mySidenav" class="sidenav">
         <h1>Menu:</h1>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -37,33 +38,18 @@
 
     <h1 class="home-h1">You Need To Do This Shit <%=name%>!</h1>
 
-    <form class="task-add" action="/task/add" method="post">
+    <!-- <form class="task-add" action="/task/add" method="post">
         <textarea type="text" name="new_task" id="new_task"></textarea>
         <Button type="submit">Add</Button>
-    </form>
-    
-    <% var t = Object.keys(tasks); %>
-    <% var task_css_class; %>
-    <% var in_progress; %>
-    <% t.reverse(); %>
-    <% for(var i=0; i < t.length; i++) { %>
-        <% task_css_class = ""; %>
-        <% in_progress = ""; %>
-        <% if(tasks[t[i]]["in_progress"]){task_css_class+=" task-in_progress"; in_progress=" - in_progress";} %>
-        <% if(tasks[t[i]]["important"]){task_css_class+=" task-important";} %>
-        <div class="task-box">
-            <p class="<%=task_css_class%>" ><%=t[i]%><%=in_progress%></p>
-            <br>
-            <form action="/task/delete/<%=t[i]%>" method="post">
-                <button type="submit" >Complete</button>
-            </form>
-            <form action="/task/progress/<%=t[i]%>" method="post">
-                <button type="submit" >Progress</button>
-            </form>
-            <form action="/task/important/<%=t[i]%>" method="post">
-                <button type="submit" >important</button>
-            </form>
-        </div>
-    <% } %>
+    </form> -->
+
+    <textarea name="new_task" id="new_task" placeholder="debil"></textarea>
+    <button id="add_button" onclick="addTask()">add</button>
+
+    <ul id="task-list">
+
+        
+
+    </ul>
 </body>
 </html>
