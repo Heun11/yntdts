@@ -40,12 +40,12 @@ function tasks_to_json(tasks_str){
 //     return str;
 // }
 
-function tasks_to_arr(tasks_str){
-    // "clean dishes[]fuck[]test[]" => ["clean dishes", "fuck", "test"] 
-    var arr = tasks_str.split("[]");
-    var trsh = arr.pop();
-    return arr;
-}
+// function tasks_to_arr(tasks_str){
+//     // "clean dishes[]fuck[]test[]" => ["clean dishes", "fuck", "test"] 
+//     var arr = tasks_str.split("[]");
+//     var trsh = arr.pop();
+//     return arr;
+// }
 
 function insert_to_user_table(name, email, password, tasks){
     sql = "INSERT INTO user(name,email,password,tasks) VALUES(?,?,?,?)";
@@ -152,21 +152,28 @@ app.get('/register', function(req, res){
 
 app.post('/auth/register', async function(req, res){
     const {name, email, password} = req.body;
-    if(user_exists_in_user_table(email)){
-        req.session.success = {is:false, mess:"User Allready Exist"};
-        res.redirect("/login");
-    }
-    else{
-        const {valid, reason, validators} = await emailValidator.validate(email);
-        if(valid){
-            insert_to_user_table(name, email, password, ["start using this shit man!"]);
-            req.session.success = {is:true, mess:"Registration Successfull"};
+    if(name.trim().length != 0 && email.trim().length != 0 && password.trim().length != 0){
+        let email_ = email.trim();
+        if(user_exists_in_user_table(email_)){
+            req.session.success = {is:false, mess:"User Allready Exist"};
             res.redirect("/login");
         }
         else{
-            req.session.success = {is:false, mess:"Registration Failed"};
-            res.redirect("/register");
+            const {valid, reason, validators} = await emailValidator.validate(email_);
+            if(valid){
+                insert_to_user_table(name, email_, password, {"Zacat toto pouzivat":{"in_progress":false, "important":true}});
+                req.session.success = {is:true, mess:"Registration Successfull"};
+                res.redirect("/login");
+            }
+            else{
+                req.session.success = {is:false, mess:"Registration Failed"};
+                res.redirect("/register");
+            }
         }
+    }
+    else{
+        req.session.success = {is:false, mess:"Registration Failed"};
+        res.redirect("/register");
     }
 });
 
