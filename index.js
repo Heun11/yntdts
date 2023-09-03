@@ -233,28 +233,12 @@ app.post('/task/delete/', function(req, res){
     }
 });
 
-app.post('/task/progress/', function(req, res){
+app.post('/task/progress', function(req, res){
     if(req.session.login){
         var u = get_data_about_user_from_user_table(req.session.login);
         var tasks = tasks_to_json(u.tasks);
         if (req.body.task in tasks) {
-            tasks[req.body.task]["in_progress"] = !tasks[req.params.task]["in_progress"];
-        }
-        update_tasks_of_user_from_user_table(req.session.login, tasks);
-        res.redirect("/");
-    }
-    else{
-        req.session.success = {is:false, mess:"You Are Not Logged in"};
-        res.redirect("/login");
-    }
-});
-
-app.post('/task/important/', function(req, res){
-    if(req.session.login){
-        var u = get_data_about_user_from_user_table(req.session.login);
-        var tasks = tasks_to_json(u.tasks);
-        if (req.body.task in tasks) {
-            tasks[req.body.task]["important"] = !tasks[req.params.task]["important"];
+            tasks[req.body.task]["in_progress"] = !tasks[req.body.task]["in_progress"];
         }
         update_tasks_of_user_from_user_table(req.session.login, tasks);
         res.redirect("/");
@@ -271,7 +255,7 @@ app.post('/task/add', function(req, res){
         var tasks = tasks_to_json(u.tasks);
         if(req.body.new_task.trim().length != 0){
             var res_task = req.body.new_task.trim();
-            tasks[res_task] = {"in_progress":false, "important":false};
+            tasks[res_task] = {"in_progress":false, "important":req.body.important};
             update_tasks_of_user_from_user_table(req.session.login, tasks);
         }
         res.redirect("/");
