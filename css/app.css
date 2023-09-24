@@ -26,16 +26,28 @@
 
     .task-add textarea{
         width: 70%;
-        height: 3rem;
+        height: 4rem;
         font-size: 1.2rem;
     }
     
-    .task-box p{
-        padding: 2%;
+    .task-add input[type=checkbox]{
+        height: 4rem;
     }
-    
-    .task-box form{
-        margin: 2%;
-        margin-top: 0;
+
+    .task-add button{
+        font-size: 1.2rem;
+    }
+
+    .task-box{
+        width: 80%;
+    }
+
+    .task-box p{
+        font-size: 1.2rem;
+    }
+
+    .task-box button{
+        font-size: 1.2rem;
+        padding: 1.2rem;
     }
 }

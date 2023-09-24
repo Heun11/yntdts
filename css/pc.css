@@ -4,11 +4,13 @@ body{
     /* background-image: linear-gradient(
         to right, rgb(201, 202, 177), rgb(247, 227, 237)
     ); */
-    background: linear-gradient(122deg, #000 0%, #0F0546 100%);
+    /* background: linear-gradient(122deg, #000 0%, #0F0546 100%); */
+    background: linear-gradient(90deg, #12142b 0%, #160909 100%);
     min-height: 100vh;
     color:aliceblue;
     font-family: Sans-serif;
     text-align: center;
+    margin: 0;
 }
 
 .sidenav {
@@ -31,6 +33,7 @@ body{
     color: #818181;
     display: block;
     transition: 0.3s;
+    margin: 0;
 }
 
 .sidenav form button{
@@ -133,7 +136,6 @@ body{
 }
 
 .home-body{
-    background: linear-gradient(90deg, #69E4BD 0%, #1669A5 100%);
     min-height: 100vh;
     color:aliceblue;
     justify-content: center;
@@ -142,17 +144,18 @@ body{
 
 .home-h1{
     font-size: 4rem;
-    /* float: left; */
     margin-top: 0;
-    color: #0F0546;
+    color: #ff05ac;
     font-weight: bold;
 }
 
 .home-menu-button{
     float: right;
     font-size: 2rem;
+    margin-right: 0.5%;
+    margin-top: 0.5%;
     vertical-align: top;
-    background-color: #32ddda;
+    background-color: #ff05ac;
     border: none;
     border-radius:10px;
     color: white;
@@ -182,6 +185,22 @@ body{
     resize:vertical;
 }
 
+.task-add input[type=checkbox]{
+    display:inline-block;
+    vertical-align: top;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 1rem;
+    height: 4rem;
+    width: 4rem;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 1.2rem;
+    resize:vertical;
+}
+
 .task-add button{
     display:inline-block;
     vertical-align: top;
@@ -189,7 +208,7 @@ body{
     border: none;
     border-radius: 20px;
     color: white;
-    padding: 1%;
+    padding: 1rem;
     text-align: center;
     text-decoration: none;
     font-size: 2rem;
@@ -199,43 +218,53 @@ body{
 }
 
 .task-box{
+    display: inline-flex;
+    width: 30%;
     margin: 1% auto;
-    /* background-color: red; */
+    margin-left: 1%;
+    margin-right: 1%;
+    background: linear-gradient(90deg, #161a42 0%, #351313 100%);
+    border-radius: 10px;
+    flex-direction: column;
 }
 
 .task-box p{
     display:inline-block;
     font-size: 1.5rem;
+    text-wrap: wrap;
     padding: 1%;
 }
 
-.task-box form{
-    display:inline-block;
-    margin: 1%;
-    margin-top: 0;
+.task-box div{
+    display: inline-flex;
+    justify-content: space-evenly;
 }
 
 .task-box button{
     display:inline-block;
-    background-color: #32dadd;
-    border: none;
+    background-color: #4b274a;
+    border-color: #450651;
+    border-style: solid;
+    border-width: 2px;
     border-radius: 20px;
     color: white;
-    padding: 10%;
     text-align: center;
     text-decoration: none;
     font-size: 1.2rem;
+    min-height: 2rem;
+    padding: 2rem;
     cursor: pointer;
 }
 
 .task-important{
-    background-color: rgb(235, 30, 201);
-    border-radius: 20px;
+    /* background: linear-gradient(90deg, #161a42 0%, #a80a9d 100%); */
+    border-color: #ff05ac;
+    border-width: 2px;
+    border-style: solid;
 }
 
 .task-in_progress{
-    background-color: rgb(64, 235, 30);
-    border-radius: 20px;
+    background: linear-gradient(90deg, #351313 0%, #195c19 100%);
 }
 
 /* PC */

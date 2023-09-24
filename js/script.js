@@ -23,12 +23,13 @@ function getTasks(){
 
                 task = key.split(" ").join("-");
 
-                html = `<li class="${classes}" id="${task}">
+                html = `<div class="${classes}" id="${task}">
                     <p>${key}</p>
-                    <br>
-                    <button onclick="deleteTask(this)">delete</button>
-                    <button onclick="progressTask(this)">progress</button>
-                </li>`;
+                    <div>
+                        <button onclick="deleteTask(this)">delete</button>
+                        <button onclick="progressTask(this)">progress</button>
+                    </div>
+                </div>`;
                 $("#task-list").append(html);
             });
         }, 
@@ -42,9 +43,11 @@ function getTasks(){
 
 function addTask(){
     let task_ = $("#new_task").val();
+    $("#new_task").val("");
     let task__ = task_.trim();
     let task = task__.split(" ").join("-");
     let imcheck = document.getElementById("important_check").checked;
+    document.getElementById("important_check").checked = false;
     $.ajax({
         type: "POST",
         url: "/task/add",
@@ -77,7 +80,7 @@ function addTask(){
 }
 
 function deleteTask(this_){
-    let parent = $(this_).parent();
+    let parent = $(this_).parent().parent();
     let task_ = (parent[0].children[0].innerHTML);
     $.ajax({
         type: "POST",
@@ -99,7 +102,7 @@ function deleteTask(this_){
 }
 
 function progressTask(this_){
-    let parent = $(this_).parent();
+    let parent = $(this_).parent().parent();
     let task_ = (parent[0].children[0].innerHTML);
     $.ajax({
         type: "POST",
