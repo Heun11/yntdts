@@ -14,8 +14,8 @@ YNTDS is very small and minimalistic TODO list made with expressJS and NodeJS as
         []register
         []delete 
     []fix some of bugs
-    []add some new features
+    [x]add some new features
         [x]posting requests in background (beacause refreshing page is annoying)
-        []add date to complition
+        [x]add date to complition
         [x]add progress
         [x]add important tasks

@@ -40,7 +40,7 @@ body{
     margin: 1% auto;
     font-size: 2rem;
     vertical-align: top;
-    background-color: #32ddda;
+    background-color: #ff05ac;
     border: none;
     border-radius:10px;
     color: white;
@@ -201,6 +201,22 @@ body{
     resize:vertical;
 }
 
+.task-add input[type=date]{
+    display:inline-block;
+    vertical-align: top;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 1rem;
+    height: 4rem;
+    /* width: 4rem; */
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 1.2rem;
+    resize:vertical;
+}
+
 .task-add button{
     display:inline-block;
     vertical-align: top;
@@ -225,7 +241,6 @@ body{
     margin-right: 1%;
     background: linear-gradient(90deg, #161a42 0%, #351313 100%);
     border-radius: 10px;
-    flex-direction: column;
 }
 
 .task-box p{
@@ -238,6 +253,22 @@ body{
 .task-box div{
     display: inline-flex;
     justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.task-box-task{
+    display: inline-flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-content: center;
+    flex-grow: 1;
+}
+
+.task-box-datum{
+    background-color: #111;
+    border-radius: 10px;
+    max-width: fit-content;
+    align-self: center;
 }
 
 .task-box button{
@@ -252,6 +283,7 @@ body{
     text-decoration: none;
     font-size: 1.2rem;
     min-height: 2rem;
+    width: 8rem;
     padding: 2rem;
     cursor: pointer;
 }
@@ -264,7 +296,7 @@ body{
 }
 
 .task-in_progress{
-    background: linear-gradient(90deg, #351313 0%, #195c19 100%);
+    background: linear-gradient(90deg, #195859 0%, #351313 100%);
 }
 
 /* PC */

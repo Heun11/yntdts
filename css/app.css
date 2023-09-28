@@ -1,6 +1,6 @@
 
 /* PHONE */
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 770px) {
      /* css for small device */
      /*                      */
 
@@ -25,13 +25,17 @@
     }
 
     .task-add textarea{
-        width: 70%;
+        width: 90%;
         height: 4rem;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     
     .task-add input[type=checkbox]{
-        height: 4rem;
+        height: 2rem;
+    }
+
+    .task-add input[type=date]{
+        height: 2rem;
     }
 
     .task-add button{

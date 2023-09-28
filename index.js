@@ -255,7 +255,7 @@ app.post('/task/add', function(req, res){
         var tasks = tasks_to_json(u.tasks);
         if(req.body.new_task.trim().length != 0){
             var res_task = req.body.new_task.trim();
-            tasks[res_task] = {"in_progress":false, "important":req.body.important};
+            tasks[res_task] = {"in_progress":false, "important":req.body.important, "date":req.body.date};
             update_tasks_of_user_from_user_table(req.session.login, tasks);
         }
         res.redirect("/");
@@ -286,5 +286,5 @@ const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
     console.log(`server started on port ${PORT}`);
     console.log(get_all_data_from_user_table());
-    // update_tasks_of_user_from_user_table("marek@gmail.com", {"spravit pekny styl":{"in_progress":false, "important":true}});
+    // update_tasks_of_user_from_user_table("marek@gmail.com", {"Treba este prerobit login, register, delete a bude hotovo":{"in_progress":false,"important":"true","date":"2023-09-30"},"pridat datumy":{"in_progress":true,"important":"true","date":"2023-09-30"},"debil hlupy":{"in_progress":false,"important":"false","date":"2023-09-30"}});
 });

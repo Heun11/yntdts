@@ -4,14 +4,14 @@ function getTasks(){
         url: "/task/get",
         data: {},
         success: function(data) {
-        // POST was successful - do something with the response
-        //   alert("refresh");
             let html;
             let classes;
             let task;
+            let date;
 
             $("#task-list").empty();
             let keys = Object.keys(data);
+            keys = keys.reverse();
             keys.forEach((key)=>{
                 classes = "task-box";
                 if((data[key].important==="true")==true){
@@ -20,11 +20,19 @@ function getTasks(){
                 if(data[key].in_progress==true){
                     classes+=" task-in_progress";
                 }
+                date = data[key].date;
+                date = "No date specified!";
+                if(date==""){
+                    date = "No date specified!";
+                }
 
                 task = key.split(" ").join("-");
 
                 html = `<div class="${classes}" id="${task}">
-                    <p>${key}</p>
+                    <div class="task-box-task"> 
+                        <p>${key}</p>
+                        <p class="task-box-datum">${date}</p>
+                    </div>
                     <div>
                         <button onclick="deleteTask(this)">delete</button>
                         <button onclick="progressTask(this)">progress</button>
@@ -47,29 +55,17 @@ function addTask(){
     let task__ = task_.trim();
     let task = task__.split(" ").join("-");
     let imcheck = document.getElementById("important_check").checked;
+    let date = document.getElementById("date").value;
     document.getElementById("important_check").checked = false;
     $.ajax({
         type: "POST",
         url: "/task/add",
         data: {
         "new_task": task__,
-        "important": imcheck
+        "important": imcheck,
+        "date":date
         },
         success: function(data) {
-        // POST was successful - do something with the response
-        //   alert("refresh");
-
-            // if($(`#${task}`).length){
-                
-            // }
-            // else{
-            //     let html = `<li class="task-box" id="${task}">
-            //         <p>${task__}</p>
-            //         <br>
-            //         <button onclick="deleteTask(this)">delete</button>
-            //     </li>`;
-            //     $("#task-list").append(html);
-            // }
             getTasks();
         },
         error: function(data) {
@@ -81,7 +77,7 @@ function addTask(){
 
 function deleteTask(this_){
     let parent = $(this_).parent().parent();
-    let task_ = (parent[0].children[0].innerHTML);
+    let task_ = (parent[0].children[0].children[0].innerHTML);
     $.ajax({
         type: "POST",
         url: `/task/delete`,
@@ -89,9 +85,6 @@ function deleteTask(this_){
             "task":task_
         },
         success: function(data) {
-        // POST was successful - do something with the response
-            // $(`#${task}`).remove();
-            // alert(data);
             getTasks();
         },
         error: function(data) {
@@ -103,7 +96,7 @@ function deleteTask(this_){
 
 function progressTask(this_){
     let parent = $(this_).parent().parent();
-    let task_ = (parent[0].children[0].innerHTML);
+    let task_ = (parent[0].children[0].children[0].innerHTML);
     $.ajax({
         type: "POST",
         url: `/task/progress`,
@@ -111,9 +104,6 @@ function progressTask(this_){
             "task":task_
         },
         success: function(data) {
-        // POST was successful - do something with the response
-            // $(`#${task}`).remove();
-            // alert(data);
             getTasks();
         },
         error: function(data) {
