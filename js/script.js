@@ -21,7 +21,6 @@ function getTasks(){
                     classes+=" task-in_progress";
                 }
                 date = data[key].date;
-                date = "No date specified!";
                 if(date==""){
                     date = "No date specified!";
                 }
