@@ -3,7 +3,7 @@
 ## About:
 YNTDS is very small and minimalistic TODO list made with expressJS and NodeJS as a fun project to learn these stuff
 
-### link: https://yntdts.zeabur.app/
+### link: for now not existing
 
 ![Alt text](image.png)
 
